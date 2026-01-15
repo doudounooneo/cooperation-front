@@ -1,0 +1,133 @@
+<navigation-bar title="心愿" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="jd-page" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="page-content">
+    <!-- 积分余额卡片 -->
+    <view class="balance-card" wx:if="{{currentFamilyId}}">
+      <view class="balance-info">
+        <text class="balance-label">可用积分</text>
+        <text class="balance-value">{{balance}}</text>
+      </view>
+      <view class="balance-icon">💎</view>
+    </view>
+
+    <!-- 发布心愿按钮 -->
+    <button class="btn btn-primary publish-btn" bindtap="openPublishModal">
+      <text>💫 发布心愿</text>
+    </button>
+    
+    <!-- 筛选 Tab -->
+    <view class="filter-tabs" wx:if="{{wishes.length > 0}}">
+      <block wx:for="{{wishTabs}}" wx:key="key">
+        <view 
+          class="tab-item {{currentTab === item.key ? 'active' : ''}}" 
+          data-key="{{item.key}}"
+          bindtap="switchTab"
+        >
+          <text>{{item.label}}</text>
+        </view>
+      </block>
+    </view>
+    
+    <!-- 心愿列表 -->
+    <view class="wish-list">
+      <block wx:for="{{filteredWishes}}" wx:key="id">
+        <view class="wish-card {{item.status}}">
+          <view class="wish-info">
+            <view class="wish-title">{{item.title}}</view>
+            <view wx:if="{{item.description}}" class="wish-desc">{{item.description}}</view>
+            <view class="wish-meta">
+              <view class="points-tag">
+                <text class="points-icon">💎</text>
+                <text class="points-value">{{item.points}}</text>
+                <text class="points-label">积分</text>
+              </view>
+              <view class="implementer">
+                <text class="implementer-label">实现人：</text>
+                <text class="implementer-name">{{item.implementerName}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="wish-actions">
+            <!-- 我的心愿可兑换 -->
+            <button wx:if="{{item.status=='open'}}" 
+                    class="action-btn redeem" 
+                    bindtap="redeemWish" 
+                    data-id="{{item.id}}">兑换</button>
+            <!-- 待同意状态 -->
+            <view wx:elif="{{item.status=='pending_approval' && item.requesterId === userId}}" 
+                  class="status-badge pending">⏳ 待同意</view>
+            <!-- 实现人操作 -->
+            <view wx:elif="{{item.status=='pending_approval' && item.implementerId === userId}}" 
+                  class="action-group">
+              <button class="action-btn approve" bindtap="approveWish" data-id="{{item.id}}">同意</button>
+              <button class="action-btn reject" bindtap="rejectWish" data-id="{{item.id}}">拒绝</button>
+            </view>
+            <!-- 已同意，待实现 -->
+            <view wx:elif="{{item.status=='approved' && item.implementerId === userId}}" class="action-group">
+              <view class="status-badge approved">✓ 已同意</view>
+              <button class="action-btn fulfill" bindtap="fulfillWish" data-id="{{item.id}}">已实现</button>
+            </view>
+            <view wx:elif="{{item.status=='approved'}}" class="status-badge approved">✓ 已同意</view>
+            <view wx:elif="{{item.status=='rejected'}}" class="status-badge rejected">✗ 已拒绝</view>
+            <view wx:elif="{{item.status=='fulfilled'}}" class="status-badge fulfilled">🎉 已实现</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    
+    <!-- 未选择家庭空状态 -->
+    <view wx:if="{{!currentFamilyId}}" class="empty-section">
+      <text class="empty-icon">🌟</text>
+      <text class="empty-text">还没有心愿</text>
+      <text class="empty-hint">发布你的第一个心愿，开始积攒吧！</text>
+      <button class="empty-btn" bindtap="goSelectFamily">请先选择家庭</button>
+    </view>
+    
+    <!-- 已选家庭但无心愿空状态 -->
+    <view wx:elif="{{filteredWishes.length === 0}}" class="empty-section">
+      <text class="empty-icon">🌟</text>
+      <text class="empty-text">{{currentTab === 'mine' ? '还没有心愿' : currentTab === 'pending' ? '暂无待处理' : '暂无心愿'}}</text>
+      <text class="empty-hint">发布你的第一个心愿，开始积攒吧！</text>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 发布心愿弹窗 -->
+<view wx:if="{{showPublishModal}}" class="modal-mask" catchtap="closePublishModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-header">
+      <text class="modal-title">💫 发布心愿</text>
+      <text class="modal-close" catchtap="closePublishModal">✕</text>
+    </view>
+    <view class="modal-body">
+      <view class="form-group">
+        <text class="form-label">心愿标题 <text class="required">*</text></text>
+        <input class="form-input" placeholder="例如：新球鞋" value="{{publishForm.title}}" data-field="title" bindinput="onFormInput" catchtap="stopPropagation" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">所需积分 <text class="required">*</text></text>
+        <view class="points-input-wrap">
+          <input class="form-input points-input" type="number" placeholder="10" value="{{publishForm.points}}" data-field="points" bindinput="onFormInput" catchtap="stopPropagation" />
+          <text class="points-suffix">积分</text>
+        </view>
+      </view>
+      <view class="form-group">
+        <text class="form-label">实现人 <text class="required">*</text></text>
+        <picker mode="selector" range="{{members}}" range-key="nickName" bindchange="selectImplementer">
+          <view class="form-input picker-value">
+            <text>{{publishForm.implementerName || '请选择家庭成员'}}</text>
+            <text class="picker-arrow">👤</text>
+          </view>
+        </picker>
+      </view>
+      <view class="form-group">
+        <text class="form-label">心愿描述</text>
+        <textarea class="form-textarea" placeholder="可选，添加详细说明" value="{{publishForm.description}}" data-field="description" bindinput="onFormInput" catchtap="stopPropagation" />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="btn btn-ghost" catchtap="closePublishModal">取消</button>
+      <button class="btn btn-primary" catchtap="submitPublish">发布心愿</button>
+    </view>
+  </view>
+</view>

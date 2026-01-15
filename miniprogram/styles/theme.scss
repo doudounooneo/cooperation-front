@@ -1,0 +1,398 @@
+// ========== 颜色变量 ==========
+$jd-red: #E1251B;
+$jd-red-dark: #C41A14;
+$jd-red-light: #FF6B5B;
+$jd-orange: #FF9500;
+$jd-green: #3CC51F;
+$jd-blue: #1989FA;
+$jd-purple: #9B59B6;
+$jd-gold: #FFD700;
+$jd-gray-bg: #F5F6F7;
+$jd-border: #EAEAEA;
+$jd-text: #1A1A1A;
+$jd-subtext: #8A8A8A;
+$jd-placeholder: #C0C0C0;
+
+// ========== 渐变色 ==========
+$gradient-red: linear-gradient(135deg, $jd-red 0%, $jd-red-light 100%);
+$gradient-header: linear-gradient(180deg, $jd-red 0%, $jd-red-dark 100%);
+$gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+$gradient-purple: linear-gradient(135deg, #9B59B6 0%, #E74C3C 100%);
+$gradient-green: linear-gradient(135deg, #3CC51F 0%, #2ECC71 100%);
+
+// ========== 间距变量 ==========
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-xxl: 32px;
+
+// ========== 圆角变量 ==========
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-full: 50%;
+
+// ========== 阴影变量 ==========
+$shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.04);
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 6px 16px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+$shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.12);
+$shadow-card: 0 4px 12px rgba(225, 37, 27, 0.08);
+$shadow-red: 0 4px 16px rgba($jd-red, 0.3);
+$shadow-purple: 0 4px 16px rgba($jd-purple, 0.3);
+
+// ========== 玻璃态效果 ==========
+$glass-bg: rgba(255, 255, 255, 0.85);
+$glass-blur: blur(10px);
+$glass-border: 1px solid rgba(255, 255, 255, 0.3);
+
+// ========== 字体 ==========
+$font-family: -apple-system, 'SF Pro Display', 'PingFang SC', sans-serif;
+$font-mono: 'SF Mono', Menlo, Consolas, monospace;
+
+// ========== 动画时间 ==========
+$transition-fast: 0.15s ease;
+$transition-normal: 0.2s ease;
+$transition-slow: 0.3s ease;
+
+// ========== 基础样式 ==========
+.page {
+  background: $jd-gray-bg;
+  min-height: 100vh;
+  font-family: $font-family;
+}
+
+.banner {
+  background: $gradient-header;
+  color: #fff;
+  padding: $spacing-xl $spacing-lg;
+}
+
+.cards {
+  margin-top: -24px;
+  padding: 0 $spacing-lg $spacing-xl;
+}
+
+.card {
+  background: #fff;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+  border: 1px solid $jd-border;
+  transition: transform $transition-normal, box-shadow $transition-normal;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-sm;
+  }
+}
+
+// ========== 列表样式 ==========
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md;
+  transition: background-color $transition-normal;
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+}
+
+.item+.item {
+  border-top: 1px solid $jd-border;
+}
+
+.title {
+  color: $jd-text;
+  font-weight: 600;
+}
+
+.meta {
+  color: $jd-subtext;
+  font-size: 12px;
+}
+
+// ========== 标签和徽章 ==========
+.badge-red {
+  background: $jd-red;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.tag {
+  border: 1px solid $jd-border;
+  border-radius: $radius-md;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: $jd-subtext;
+}
+
+.tag-primary {
+  background: rgba($jd-red, 0.1);
+  color: $jd-red;
+  border: none;
+}
+
+.tag-success {
+  background: rgba($jd-green, 0.1);
+  color: $jd-green;
+  border: none;
+}
+
+.tag-warning {
+  background: rgba($jd-orange, 0.1);
+  color: $jd-orange;
+  border: none;
+}
+
+.tag-purple {
+  background: rgba($jd-purple, 0.1);
+  color: $jd-purple;
+  border: none;
+}
+
+// ========== 按钮样式 ==========
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all $transition-normal;
+  border: none;
+  font-family: $font-family;
+
+  &:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+  }
+}
+
+.btn-primary {
+  background: $gradient-red;
+  color: #fff;
+  box-shadow: $shadow-red;
+
+  &:active {
+    box-shadow: 0 2px 6px rgba($jd-red, 0.2);
+  }
+}
+
+.btn-outline {
+  background: #fff;
+  color: $jd-red;
+  border: 1px solid $jd-red;
+
+  &:active {
+    background: rgba($jd-red, 0.05);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $jd-subtext;
+
+  &:active {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.btn-purple {
+  background: $gradient-purple;
+  color: #fff;
+  box-shadow: $shadow-purple;
+}
+
+// ========== 空状态 ==========
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px $spacing-lg;
+  color: $jd-subtext;
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: $spacing-lg;
+    opacity: 0.5;
+  }
+
+  .empty-text {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+// ========== 输入框 ==========
+.input-field {
+  border: 1px solid $jd-border;
+  border-radius: $radius-sm;
+  padding: $spacing-sm $spacing-md;
+  font-size: 14px;
+  transition: border-color $transition-normal, box-shadow $transition-normal;
+  background: #fff;
+  font-family: $font-family;
+
+  &:focus {
+    border-color: $jd-red;
+    box-shadow: 0 0 0 2px rgba($jd-red, 0.1);
+  }
+}
+
+// ========== 动画 ==========
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 0.6s ease infinite;
+}
+
+// ========== 积分数字样式 ==========
+.points-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: $jd-red;
+  font-family: $font-family;
+}
+
+.points-large {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: $font-family;
+}
+
+// ========== 骨架屏 ==========
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: $radius-sm;
+}
+
+// ========== 分割线 ==========
+.divider {
+  height: 1px;
+  background: $jd-border;
+  margin: $spacing-md 0;
+}
+
+.divider-text {
+  display: flex;
+  align-items: center;
+  color: $jd-subtext;
+  font-size: 12px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $jd-border;
+  }
+
+  &::before {
+    margin-right: $spacing-md;
+  }
+
+  &::after {
+    margin-left: $spacing-md;
+  }
+}

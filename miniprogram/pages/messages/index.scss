@@ -1,0 +1,188 @@
+@import '../../styles/theme.scss';
+
+.jd-page {
+    background: $jd-gray-bg;
+    min-height: 100vh;
+}
+
+.page-content {
+    padding: $spacing-lg;
+    padding-bottom: 100px;
+}
+
+// ========== 操作栏 ==========
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-lg;
+    box-shadow: $shadow-sm;
+}
+
+.unread-tip {
+    font-size: 14px;
+    color: $jd-red;
+    font-weight: 500;
+}
+
+.mark-all-btn {
+    font-size: 13px;
+    color: $jd-subtext;
+    background: transparent;
+    border: none;
+    padding: $spacing-xs $spacing-sm;
+
+    &:active {
+        color: $jd-text;
+    }
+}
+
+// ========== 消息列表 ==========
+.message-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.message-card {
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    box-shadow: $shadow-sm;
+    position: relative;
+    transition: all 0.2s ease;
+
+    &.unread {
+        border-left: 3px solid $jd-red;
+        background: linear-gradient(135deg, #FFF8F8 0%, #fff 100%);
+    }
+
+    &:active {
+        transform: scale(0.99);
+    }
+}
+
+.unread-indicator {
+    position: absolute;
+    top: $spacing-lg;
+    right: $spacing-lg;
+    width: 8px;
+    height: 8px;
+    background: $jd-red;
+    border-radius: 50%;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-sm;
+}
+
+.message-type {
+    font-size: 13px;
+    font-weight: 600;
+
+    &.type-wish_request {
+        color: #9B59B6;
+    }
+
+    &.type-task_verification {
+        color: $jd-green;
+    }
+
+    &.type-points_change {
+        color: #F5A623;
+    }
+
+    &.type-system {
+        color: $jd-subtext;
+    }
+}
+
+.message-time {
+    font-size: 12px;
+    color: $jd-subtext;
+}
+
+.message-content {
+    font-size: 15px;
+    color: $jd-text;
+    line-height: 1.5;
+    margin-bottom: $spacing-md;
+}
+
+.message-actions {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    font-size: 13px;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    border: none;
+    min-width: 64px;
+
+    &.approve {
+        background: $jd-green;
+        color: #fff;
+    }
+
+    &.reject {
+        background: rgba(#E74C3C, 0.1);
+        color: #E74C3C;
+    }
+
+    &.view {
+        background: rgba($jd-red, 0.1);
+        color: $jd-red;
+    }
+
+    &.read {
+        background: rgba(0, 0, 0, 0.05);
+        color: $jd-subtext;
+    }
+
+    &:active {
+        opacity: 0.9;
+        transform: scale(0.96);
+    }
+}
+
+.read-badge {
+    font-size: 12px;
+    color: $jd-subtext;
+    padding: $spacing-sm $spacing-md;
+}
+
+// ========== 空状态 ==========
+.empty-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px $spacing-lg;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: $spacing-lg;
+}
+
+.empty-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: $jd-text;
+    margin-bottom: $spacing-sm;
+}
+
+.empty-hint {
+    font-size: 14px;
+    color: $jd-subtext;
+}

@@ -1,0 +1,7 @@
+node_modules/
+miniprogram_npm/
+unpackage/
+dist/
+.DS_Store
+project.private.config.json
+typings/

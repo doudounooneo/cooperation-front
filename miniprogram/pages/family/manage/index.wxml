@@ -1,0 +1,137 @@
+<navigation-bar title="家庭管理" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="jd-page" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="page-content">
+    <!-- 创建家庭 -->
+    <block wx:if="{{mode==='create'}}">
+      <view class="form-section">
+        <view class="form-header">
+          <text class="form-icon">🏠</text>
+          <text class="form-title">创建新家庭</text>
+        </view>
+        <view class="form-hint">创建后您会成为这个家庭的家长</view>
+        <view class="form-group">
+          <text class="form-label">家庭名称</text>
+          <input class="form-input" placeholder="例如：温馨小家" bindinput="onNameInput" value="{{name}}" />
+        </view>
+        <button class="btn btn-primary" bindtap="createFamily">创建家庭</button>
+      </view>
+    </block>
+    
+    <!-- 绑定家庭 -->
+    <block wx:elif="{{mode==='bind'}}">
+      <view class="form-section">
+        <view class="form-header">
+          <text class="form-icon">🔗</text>
+          <text class="form-title">加入已有家庭</text>
+        </view>
+        <view class="form-hint">输入家人分享的邀请码加入他们的家庭</view>
+        <view class="form-group">
+          <text class="form-label">邀请码</text>
+          <input class="form-input" placeholder="请输入邀请码" bindinput="onCodeInput" value="{{codeInput}}" />
+        </view>
+        <button class="btn btn-primary" bindtap="bindFamily">加入家庭</button>
+      </view>
+    </block>
+    
+    <!-- 家庭列表 -->
+    <block wx:else>
+      <!-- 操作按钮 -->
+      <view class="action-row">
+        <view class="action-card" bindtap="goCreate">
+          <text class="action-icon">✨</text>
+          <text class="action-text">创建家庭</text>
+        </view>
+        <view class="action-card" bindtap="goBind">
+          <text class="action-icon">🔗</text>
+          <text class="action-text">加入家庭</text>
+        </view>
+      </view>
+
+      <view class="section-header">
+        <text class="section-title">我的家庭</text>
+        <text class="section-count">{{families.length}} / {{maxFamilies}}</text>
+      </view>
+      
+      <view class="family-list">
+        <block wx:for="{{families}}" wx:key="id">
+          <view class="family-card {{item.id === currentFamilyId ? 'current' : ''}}">
+            <view class="family-main">
+              <view class="family-info">
+                <view class="family-name">
+                  {{item.name}}
+                  <text wx:if="{{item.id === currentFamilyId}}" class="current-tag">当前</text>
+                </view>
+                <view class="family-code">
+                  <text class="code-label">邀请码：</text>
+                  <text class="code-value">{{item.inviteCode || item.id}}</text>
+                </view>
+              </view>
+              <view class="family-actions">
+                <button class="icon-btn" bindtap="copyCode" data-code="{{item.inviteCode || item.id}}">📋</button>
+                <button class="icon-btn" bindtap="shareFamily" data-code="{{item.inviteCode || item.id}}" data-name="{{item.name}}">📤</button>
+              </view>
+            </view>
+            <view class="family-footer">
+              <button wx:if="{{item.id !== currentFamilyId}}" 
+                      class="link-btn primary" 
+                      bindtap="switchCurrent" 
+                      data-id="{{item.id}}">设为当前</button>
+              <button class="link-btn danger" 
+                      bindtap="leaveFamily" 
+                      data-id="{{item.id}}" 
+                      data-name="{{item.name}}">退出家庭</button>
+            </view>
+          </view>
+        </block>
+      </view>
+      
+      <!-- 成员列表（当前家庭） -->
+      <view wx:if="{{members.length > 0}}" class="members-section">
+        <view class="section-header">
+          <text class="section-title">家庭成员</text>
+          <text class="section-count">{{members.length}} 人</text>
+        </view>
+        <view class="member-list">
+          <block wx:for="{{members}}" wx:key="userId">
+            <view class="member-card">
+              <image class="member-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+              <view class="member-info">
+                <view class="member-name">
+                  {{item.nickName}}
+                  <text wx:if="{{item.userId === userId}}" class="me-tag">我</text>
+                </view>
+                <view class="member-role {{item.role}}">
+                  {{item.role === 'parent' ? '👑 家长' : '👤 成员'}}
+                </view>
+              </view>
+              <view class="member-points">
+                <text class="points-value">{{item.points || 0}}</text>
+                <text class="points-label">积分</text>
+              </view>
+              <!-- 家长才能管理成员 -->
+              <view wx:if="{{isParent && item.userId !== userId}}" class="member-actions">
+                <button class="mini-btn" 
+                        bindtap="setMemberRole" 
+                        data-user-id="{{item.userId}}" 
+                        data-role="{{item.role}}">
+                  {{item.role === 'parent' ? '设为成员' : '设为家长'}}
+                </button>
+                <button class="mini-btn danger" 
+                        bindtap="removeMember" 
+                        data-user-id="{{item.userId}}" 
+                        data-name="{{item.nickName}}">移除</button>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+      
+      <!-- 空状态 -->
+      <view wx:if="{{families.length === 0}}" class="empty-section">
+        <text class="empty-icon">👨‍👩‍👧‍👦</text>
+        <text class="empty-text">还没有加入家庭</text>
+        <text class="empty-hint">创建一个家庭或加入已有家庭</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>

@@ -1,0 +1,52 @@
+<navigation-bar title="站内信" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="jd-page" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="page-content">
+    <!-- 顶部操作栏 -->
+    <view wx:if="{{unreadCount > 0}}" class="action-bar">
+      <text class="unread-tip">{{unreadCount}} 条未读消息</text>
+      <button class="mark-all-btn" bindtap="markAllRead">全部已读</button>
+    </view>
+
+    <!-- 消息列表 -->
+    <view class="message-list" wx:if="{{messages.length > 0}}">
+      <block wx:for="{{messages}}" wx:key="id">
+        <view class="message-card {{item.unread ? 'unread' : ''}}">
+          <view class="message-header">
+            <view class="message-type type-{{item.type}}">
+              <text wx:if="{{item.type=='wish_request'}}">💫 心愿请求</text>
+              <text wx:elif="{{item.type=='task_verification'}}">✅ 任务验证</text>
+              <text wx:elif="{{item.type=='points_change'}}">💰 积分变动</text>
+              <text wx:else>📢 通知</text>
+            </view>
+            <view class="message-time">{{item.createdAt}}</view>
+          </view>
+          <view wx:if="{{item.unread}}" class="unread-indicator"></view>
+          <view class="message-content">{{item.content}}</view>
+          <view class="message-actions">
+            <!-- 心愿请求操作 -->
+            <block wx:if="{{item.type=='wish_request' && item.unread}}">
+              <button class="action-btn approve" bindtap="approveWish" data-id="{{item.id}}">同意</button>
+              <button class="action-btn reject" bindtap="rejectWish" data-id="{{item.id}}">拒绝</button>
+            </block>
+            <!-- 任务验证提醒 -->
+            <block wx:elif="{{item.type=='task_verification'}}">
+              <button class="action-btn view" bindtap="viewTask" data-id="{{item.id}}">查看任务</button>
+            </block>
+            <!-- 其他类型 -->
+            <block wx:elif="{{item.unread}}">
+              <button class="action-btn read" bindtap="markRead" data-id="{{item.id}}">知道了</button>
+            </block>
+            <view wx:else class="read-badge">已读</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    
+    <!-- 空状态 -->
+    <view wx:if="{{messages.length === 0}}" class="empty-section">
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">暂无消息</text>
+      <text class="empty-hint">新的通知会在这里显示</text>
+    </view>
+  </view>
+</scroll-view>

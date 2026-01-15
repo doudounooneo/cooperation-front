@@ -1,0 +1,735 @@
+@import '../../styles/theme.scss';
+
+.jd-page {
+    background: $jd-gray-bg;
+    min-height: 100vh;
+}
+
+// ========== 未登录引导页 ==========
+.login-guide {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    background: linear-gradient(165deg, $jd-red 0%, #FF6B5B 40%, #FFB347 100%);
+    border-radius: 0 0 60px 60px;
+}
+
+.guide-content {
+    position: relative;
+    padding: 80px $spacing-lg 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.guide-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.logo-icon {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    margin-bottom: 16px;
+}
+
+.logo-text {
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.guide-desc {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.desc-main {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.desc-sub {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.guide-features {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 40px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $jd-border;
+    }
+}
+
+.feature-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E0 100%);
+    border-radius: 12px;
+}
+
+.feature-text {
+    flex: 1;
+    font-size: 15px;
+    color: $jd-text;
+    font-weight: 500;
+}
+
+.guide-btn {
+    width: 100%;
+    height: 52px;
+    background: linear-gradient(135deg, $jd-red 0%, #FF6B5B 100%);
+    border-radius: 26px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(231, 76, 60, 0.35);
+    margin-bottom: 16px;
+
+    &:active {
+        transform: scale(0.98);
+        box-shadow: 0 4px 16px rgba(231, 76, 60, 0.35);
+    }
+}
+
+.btn-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.btn-arrow {
+    font-size: 20px;
+    color: #fff;
+}
+
+.guide-tip {
+    font-size: 12px;
+    color: $jd-subtext;
+    text-align: center;
+}
+
+// ========== 登录区域 ==========
+.login-section {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.divider-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+}
+
+.wx-login-btn {
+    width: 100%;
+    height: 52px;
+    background: #07C160;
+    border-radius: 26px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(7, 193, 96, 0.35);
+
+    &:active {
+        transform: scale(0.98);
+        background: #06AD56;
+    }
+}
+
+.wx-icon {
+    width: 24px;
+    height: 24px;
+}
+
+
+// ========== 授权模态框 ==========
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.modal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    padding: 0 24px 40px;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid $jd-border;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: $jd-text;
+}
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: $jd-subtext;
+    background: $jd-gray-bg;
+    border-radius: 50%;
+}
+
+.modal-body {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.modal-avatar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    &::after {
+        display: none;
+    }
+}
+
+.modal-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 4px solid $jd-gray-bg;
+    background: $jd-gray-bg;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.modal-avatar-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.overlay-text {
+    font-size: 11px;
+    color: #fff;
+}
+
+.modal-tips {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFF7E6;
+    border: 1px solid #FFE4B5;
+    border-radius: 12px;
+    padding: 12px 16px;
+    width: 100%;
+}
+
+.tips-icon {
+    font-size: 18px;
+}
+
+.tips-text {
+    flex: 1;
+    font-size: 13px;
+    color: #D97C00;
+}
+
+.modal-avatar-text {
+    font-size: 13px;
+    color: $jd-blue;
+    font-weight: 500;
+}
+
+.modal-input-wrapper {
+    width: 100%;
+    background: $jd-gray-bg;
+    border-radius: 12px;
+    padding: 0 16px;
+}
+
+.modal-input {
+    width: 100%;
+    height: 52px;
+    font-size: 16px;
+    color: $jd-text;
+    text-align: center;
+}
+
+.modal-footer {
+    padding-top: 8px;
+}
+
+.modal-confirm-btn {
+    width: 100%;
+    height: 52px;
+    background: linear-gradient(135deg, $jd-red 0%, #FF6B5B 100%);
+    border-radius: 26px;
+    border: none;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(231, 76, 60, 0.35);
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+// ========== 头部区域 ==========
+.profile-header {
+    position: relative;
+    padding-bottom: 24px;
+}
+
+.header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, $jd-red 0%, #FF6B5B 50%, #FFB347 100%);
+    border-radius: 0 0 32px 32px;
+}
+
+.header-content {
+    position: relative;
+    padding: 60px $spacing-lg $spacing-lg;
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+}
+
+.avatar-wrapper {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    &::after {
+        display: none;
+    }
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    background: $jd-gray-bg;
+}
+
+.avatar-edit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.user-info {
+    flex: 1;
+}
+
+.nickname {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+    margin-bottom: $spacing-xs;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.family-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 4px 12px;
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
+}
+
+.family-icon {
+    font-size: 14px;
+}
+
+.family-name {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.no-family {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.role-badge {
+    display: inline-block;
+    font-size: 11px;
+    color: #fff;
+    background: rgba(255, 215, 0, 0.8);
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: $spacing-xs;
+    font-weight: 600;
+}
+
+// ========== 积分卡片 ==========
+.cards-section {
+    padding: 0 $spacing-lg;
+    margin-top: -8px;
+}
+
+.points-cards {
+    display: flex;
+    gap: $spacing-md;
+}
+
+.points-card {
+    flex: 1;
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    box-shadow: $shadow-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    transition: all 0.2s ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &.earned {
+        border-top: 3px solid #FFD700;
+    }
+
+    &.balance {
+        border-top: 3px solid $jd-green;
+    }
+}
+
+.card-icon {
+    font-size: 32px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-label {
+    font-size: 12px;
+    color: $jd-subtext;
+    margin-bottom: 4px;
+}
+
+.card-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: $jd-text;
+    font-family: -apple-system, 'SF Pro Display', sans-serif;
+}
+
+// ========== 菜单列表 ==========
+.menu-list {
+    margin: $spacing-lg;
+    background: #fff;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-lg;
+    transition: background-color 0.2s ease;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $jd-border;
+    }
+
+    &:active {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+}
+
+.menu-icon {
+    font-size: 20px;
+}
+
+.menu-text {
+    font-size: 16px;
+    color: $jd-text;
+    font-weight: 500;
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+}
+
+.menu-extra {
+    font-size: 13px;
+    color: $jd-subtext;
+}
+
+.unread-badge {
+    background: $jd-red;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+}
+
+.menu-arrow {
+    font-size: 20px;
+    color: $jd-subtext;
+}
+
+// ========== 积分排行榜 ==========
+.leaderboard-section {
+    margin: 0 $spacing-lg;
+    margin-bottom: $spacing-lg;
+}
+
+.section-header {
+    margin-bottom: $spacing-md;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $jd-text;
+}
+
+.leaderboard {
+    background: #fff;
+    border-radius: $radius-md;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    transition: background-color 0.2s ease;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $jd-border;
+    }
+
+    &.top1 {
+        background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 100%);
+
+        .rank-num {
+            color: #FFD700;
+            font-weight: 700;
+        }
+    }
+
+    &.top2 {
+        background: linear-gradient(135deg, #F5F5F5 0%, #EEEEEE 100%);
+
+        .rank-num {
+            color: #C0C0C0;
+            font-weight: 700;
+        }
+    }
+
+    &.top3 {
+        background: linear-gradient(135deg, #FFF0E6 0%, #FFE4D6 100%);
+
+        .rank-num {
+            color: #CD7F32;
+            font-weight: 700;
+        }
+    }
+}
+
+.rank-num {
+    width: 24px;
+    text-align: center;
+    font-size: 14px;
+    color: $jd-subtext;
+}
+
+.rank-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: $jd-gray-bg;
+}
+
+.rank-name {
+    flex: 1;
+    font-size: 14px;
+    color: $jd-text;
+    font-weight: 500;
+}
+
+.rank-points {
+    font-size: 14px;
+    font-weight: 600;
+    color: $jd-red;
+}
+
+// ========== 退出登录 ==========
+.logout-section {
+    padding: $spacing-lg;
+    padding-top: 0;
+}
+
+.logout-btn {
+    width: 100%;
+    background: #fff;
+    color: #E74C3C;
+    font-size: 16px;
+    font-weight: 600;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    border: 1px solid #E74C3C;
+
+    &:active {
+        background: rgba(#E74C3C, 0.05);
+    }
+}

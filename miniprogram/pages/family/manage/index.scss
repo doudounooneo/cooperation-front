@@ -1,0 +1,383 @@
+@import '../../../styles/theme.scss';
+
+.jd-page {
+    background: $jd-gray-bg;
+    min-height: 100vh;
+}
+
+.page-content {
+    padding: $spacing-lg;
+    padding-bottom: 100px;
+}
+
+// ========== 操作按钮行 ==========
+.action-row {
+    display: flex;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+}
+
+.action-card {
+    flex: 1;
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    box-shadow: $shadow-sm;
+    transition: all 0.2s ease;
+
+    &:active {
+        transform: scale(0.98);
+        box-shadow: $shadow-md;
+    }
+}
+
+.action-icon {
+    font-size: 32px;
+}
+
+.action-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: $jd-text;
+}
+
+// ========== 表单区域 ==========
+.form-section {
+    background: #fff;
+    border-radius: $radius-lg;
+    padding: $spacing-xl;
+    box-shadow: $shadow-md;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-sm;
+}
+
+.form-icon {
+    font-size: 32px;
+}
+
+.form-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: $jd-text;
+}
+
+.form-hint {
+    font-size: 13px;
+    color: $jd-subtext;
+    margin-bottom: $spacing-xl;
+}
+
+.form-group {
+    margin-bottom: $spacing-lg;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: $jd-text;
+    margin-bottom: $spacing-sm;
+}
+
+.form-input {
+    width: 100%;
+    padding: $spacing-md;
+    border: 1px solid $jd-border;
+    border-radius: $radius-sm;
+    font-size: 15px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+        border-color: $jd-red;
+    }
+}
+
+// ========== 按钮 ==========
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, $jd-red 0%, #FF6B5B 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba($jd-red, 0.3);
+}
+
+// ========== 区域头部 ==========
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-md;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $jd-text;
+}
+
+.section-count {
+    font-size: 12px;
+    color: $jd-subtext;
+}
+
+// ========== 家庭列表 ==========
+.family-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+}
+
+.family-card {
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    box-shadow: $shadow-sm;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    &.current {
+        border-color: $jd-red;
+        background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
+    }
+}
+
+.family-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.family-info {
+    flex: 1;
+}
+
+.family-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: $jd-text;
+    margin-bottom: $spacing-xs;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+}
+
+.current-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: $jd-red;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.family-code {
+    font-size: 13px;
+    color: $jd-subtext;
+}
+
+.code-value {
+    color: $jd-text;
+    font-family: 'SF Mono', Menlo, monospace;
+}
+
+.family-actions {
+    display: flex;
+    gap: $spacing-xs;
+}
+
+.icon-btn {
+    font-size: 18px;
+    padding: $spacing-sm;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: $radius-sm;
+    border: none;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:active {
+        background: rgba(0, 0, 0, 0.06);
+    }
+}
+
+.family-footer {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid $jd-border;
+}
+
+.link-btn {
+    font-size: 13px;
+    color: $jd-subtext;
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    &.primary {
+        color: $jd-red;
+        font-weight: 500;
+    }
+
+    &.danger {
+        color: #E74C3C;
+    }
+
+    &:active {
+        opacity: 0.7;
+    }
+}
+
+// ========== 成员列表 ==========
+.members-section {
+    margin-top: $spacing-lg;
+}
+
+.member-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+}
+
+.member-card {
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    box-shadow: $shadow-sm;
+}
+
+.member-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $jd-gray-bg;
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: $jd-text;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.me-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: $jd-red;
+    background: rgba($jd-red, 0.1);
+    padding: 1px 6px;
+    border-radius: 8px;
+}
+
+.member-role {
+    font-size: 12px;
+    color: $jd-subtext;
+    margin-top: 2px;
+
+    &.parent {
+        color: #F5A623;
+    }
+}
+
+.member-points {
+    text-align: center;
+    padding: 0 $spacing-md;
+}
+
+.member-points .points-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: $jd-text;
+    display: block;
+}
+
+.member-points .points-label {
+    font-size: 11px;
+    color: $jd-subtext;
+}
+
+.member-actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+.mini-btn {
+    font-size: 11px;
+    color: $jd-subtext;
+    background: rgba(0, 0, 0, 0.03);
+    border: none;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+
+    &.danger {
+        color: #E74C3C;
+    }
+
+    &:active {
+        background: rgba(0, 0, 0, 0.06);
+    }
+}
+
+// ========== 空状态 ==========
+.empty-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px $spacing-lg;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: $spacing-lg;
+}
+
+.empty-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: $jd-text;
+    margin-bottom: $spacing-sm;
+}
+
+.empty-hint {
+    font-size: 14px;
+    color: $jd-subtext;
+}

@@ -1,0 +1,156 @@
+<navigation-bar title="我的" back="{{false}}" color="white" background="transparent"></navigation-bar>
+<scroll-view class="jd-page" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 未登录引导页 -->
+  <view wx:if="{{!hasUserInfo}}" class="login-guide">
+    <view class="guide-bg"></view>
+    <view class="guide-content">
+      <view class="guide-logo">
+        <view class="logo-icon">🏠</view>
+        <text class="logo-text">家庭任务助手</text>
+      </view>
+      <view class="guide-desc">
+        <text class="desc-main">欢迎使用家庭任务积分系统</text>
+        <text class="desc-sub">一起完成任务，赢取积分，实现心愿！</text>
+      </view>
+      
+      <!-- 推荐登录方式 -->
+      <view class="login-section">
+        <view class="login-divider">
+          <view class="divider-line"></view>
+          <text class="divider-text">推荐登录方式</text>
+          <view class="divider-line"></view>
+        </view>
+        
+        <!-- 微信一键登录按钮 -->
+        <button class="wx-login-btn" bindtap="doLogin">
+          <image class="wx-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.045c.133 0 .241-.108.241-.243 0-.06-.024-.12-.04-.178l-.327-1.233a.492.492 0 0 1-.067-.246c0-.108.04-.21.12-.254C24.019 17.81 24 15.17 24 15.17c0-3.376-3.09-6.16-6.861-6.312h-.201zm-1.81 2.858c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.841 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z'/%3E%3C/svg%3E" mode="aspectFit"></image>
+          <text class="btn-text">微信快捷登录</text>
+        </button>
+      </view>
+      
+      <text class="guide-tip">点击即表示您同意《用户协议》和《隐私政策》</text>
+    </view>
+  </view>
+
+  <!-- 已登录：头部区域 -->
+  <view wx:else class="profile-header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{user.avatarUrl}}" mode="aspectFill"></image>
+        <view class="avatar-edit">📷</view>
+      </button>
+      <view class="user-info">
+        <text class="nickname" bindtap="showAuthModal">{{user.nickName || '点击设置昵称'}}</text>
+        <view class="family-tag" wx:if="{{currentFamilyName}}">
+          <text class="family-icon">🏠</text>
+          <text class="family-name">{{currentFamilyName}}</text>
+        </view>
+        <text class="no-family" wx:elif="{{!currentFamilyId}}">未加入家庭</text>
+        <view wx:if="{{isParent}}" class="role-badge">👑 家长</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 积分卡片（仅已登录显示） -->
+  <view wx:if="{{hasUserInfo}}" class="cards-section">
+    <view class="points-cards">
+      <view class="points-card earned">
+        <view class="card-icon">⭐</view>
+        <view class="card-content">
+          <text class="card-label">累计赚取</text>
+          <text class="card-value">{{myPoints}}</text>
+        </view>
+      </view>
+      <view class="points-card balance">
+        <view class="card-icon">💰</view>
+        <view class="card-content">
+          <text class="card-label">可用积分</text>
+          <text class="card-value">{{balance}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能列表（仅已登录显示） -->
+  <view wx:if="{{hasUserInfo}}" class="menu-list">
+    <view class="menu-item" bindtap="openMessages">
+      <view class="menu-left">
+        <text class="menu-icon">📬</text>
+        <text class="menu-text">站内信</text>
+      </view>
+      <view class="menu-right">
+        <view wx:if="{{unreadCount>0}}" class="unread-badge">{{unreadCount}}</view>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+    <view class="menu-item" bindtap="openFamilyManage">
+      <view class="menu-left">
+        <text class="menu-icon">👨‍👩‍👧‍👦</text>
+        <text class="menu-text">家庭管理</text>
+      </view>
+      <view class="menu-right">
+        <text class="menu-extra">{{families.length}} 个家庭</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 家庭成员积分排行 -->
+  <view wx:if="{{hasUserInfo && members.length > 1}}" class="leaderboard-section">
+    <view class="section-header">
+      <text class="section-title">🏆 家庭积分榜</text>
+    </view>
+    <view class="leaderboard">
+      <block wx:for="{{members}}" wx:key="userId">
+        <view class="rank-item {{index < 3 ? 'top' + (index + 1) : ''}}">
+          <view class="rank-num">{{index + 1}}</view>
+          <image class="rank-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+          <view class="rank-name">{{item.nickName}}</view>
+          <view class="rank-points">{{item.points || 0}} 分</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+  <!-- 退出登录 -->
+  <view class="logout-section" wx:if="{{hasUserInfo}}">
+    <button class="logout-btn" bindtap="logout">退出登录</button>
+  </view>
+</scroll-view>
+
+<!-- 授权模态框 -->
+<view wx:if="{{showModal}}" class="auth-modal">
+  <view class="modal-mask" bindtap="hideAuthModal"></view>
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">完善个人信息</text>
+      <view class="modal-close" bindtap="hideAuthModal">✕</view>
+    </view>
+    <view class="modal-body">
+      <view class="modal-tips">
+        <text class="tips-icon">💡</text>
+        <text class="tips-text">点击头像和昵称框可自动获取微信信息</text>
+      </view>
+      <button class="modal-avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="modal-avatar" src="{{tempAvatarUrl || user.avatarUrl}}" mode="aspectFill"></image>
+        <view class="modal-avatar-overlay">
+          <text class="overlay-text">点击获取头像</text>
+        </view>
+      </button>
+      <view class="modal-input-wrapper">
+        <input 
+          type="nickname" 
+          class="modal-input" 
+          placeholder="点击获取微信昵称" 
+          value="{{tempNickName}}" 
+          bind:blur="onNicknameBlur"
+          bind:input="onNicknameInput"
+        />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <button class="modal-confirm-btn" bindtap="confirmAuth">确认保存</button>
+    </view>
+  </view>
+</view>

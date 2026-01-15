@@ -1,0 +1,449 @@
+@import '../../styles/theme.scss';
+
+.jd-page {
+    background: $jd-gray-bg;
+    min-height: 100vh;
+}
+
+.page-content {
+    padding: $spacing-lg;
+    padding-bottom: 100px;
+}
+
+// ========== 积分余额卡片 ==========
+.balance-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #9B59B6 0%, #E74C3C 100%);
+    border-radius: $radius-lg;
+    padding: $spacing-xl $spacing-lg;
+    margin-bottom: $spacing-lg;
+    box-shadow: 0 4px 16px rgba(#9B59B6, 0.3);
+}
+
+.balance-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.balance-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4px;
+}
+
+.balance-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    font-family: -apple-system, 'SF Pro Display', sans-serif;
+}
+
+.balance-icon {
+    font-size: 48px;
+    opacity: 0.8;
+}
+
+// ========== 按钮样式 ==========
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-xl;
+    border-radius: $radius-md;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #9B59B6 0%, #E74C3C 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(#9B59B6, 0.3);
+
+    &:active {
+        box-shadow: 0 2px 8px rgba(#9B59B6, 0.2);
+    }
+}
+
+.btn-ghost {
+    background: transparent;
+    color: $jd-subtext;
+    padding: $spacing-sm $spacing-lg;
+}
+
+.publish-btn {
+    width: 100%;
+    margin-bottom: $spacing-lg;
+}
+
+// ========== 筛选 Tab ==========
+.filter-tabs {
+    display: flex;
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-xs;
+    margin-bottom: $spacing-lg;
+    box-shadow: $shadow-sm;
+}
+
+.tab-item {
+    flex: 1;
+    text-align: center;
+    padding: $spacing-sm $spacing-xs;
+    font-size: 13px;
+    color: $jd-subtext;
+    border-radius: $radius-sm;
+    transition: all 0.2s ease;
+
+    &.active {
+        background: linear-gradient(135deg, #9B59B6 0%, #E74C3C 100%);
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(#9B59B6, 0.25);
+    }
+}
+
+// ========== 心愿列表 ==========
+.wish-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.wish-card {
+    background: #fff;
+    border-radius: $radius-md;
+    padding: $spacing-lg;
+    box-shadow: $shadow-md;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+
+    &.open {
+        border-left-color: #9B59B6;
+    }
+
+    &.pending_approval {
+        border-left-color: $jd-orange;
+    }
+
+    &.approved {
+        border-left-color: $jd-green;
+    }
+
+    &.rejected {
+        border-left-color: #E74C3C;
+        opacity: 0.7;
+    }
+
+    &.fulfilled {
+        border-left-color: #FFD700;
+        background: linear-gradient(135deg, #FFFEF5 0%, #FFF9E6 100%);
+    }
+
+    &:active {
+        transform: scale(0.99);
+        box-shadow: $shadow-sm;
+    }
+}
+
+.wish-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.wish-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $jd-text;
+    margin-bottom: $spacing-xs;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wish-desc {
+    font-size: 13px;
+    color: $jd-subtext;
+    margin-bottom: $spacing-sm;
+}
+
+.wish-meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+}
+
+.points-tag {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.points-icon {
+    font-size: 12px;
+}
+
+.points-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #9B59B6;
+}
+
+.points-label {
+    font-size: 12px;
+    color: #7B1FA2;
+    margin-left: 2px;
+}
+
+.implementer {
+    font-size: 12px;
+    color: $jd-subtext;
+}
+
+.implementer-name {
+    color: $jd-text;
+    font-weight: 500;
+}
+
+// ========== 操作区域 ==========
+.wish-actions {
+    margin-left: $spacing-md;
+    flex-shrink: 0;
+}
+
+.action-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+.action-btn {
+    font-size: 13px;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    border: none;
+    min-width: 64px;
+
+    &.redeem {
+        background: linear-gradient(135deg, #9B59B6 0%, #E74C3C 100%);
+        color: #fff;
+    }
+
+    &.approve {
+        background: $jd-green;
+        color: #fff;
+    }
+
+    &.reject {
+        background: rgba(#E74C3C, 0.1);
+        color: #E74C3C;
+    }
+
+    &.fulfill {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #fff;
+    }
+
+    &:active {
+        opacity: 0.9;
+        transform: scale(0.96);
+    }
+}
+
+.status-badge {
+    font-size: 13px;
+    font-weight: 600;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-sm;
+
+    &.pending {
+        color: $jd-orange;
+        background: rgba($jd-orange, 0.1);
+    }
+
+    &.approved {
+        color: $jd-green;
+        background: rgba($jd-green, 0.1);
+    }
+
+    &.rejected {
+        color: #E74C3C;
+        background: rgba(#E74C3C, 0.1);
+    }
+
+    &.fulfilled {
+        color: #B8860B;
+        background: rgba(#FFD700, 0.2);
+    }
+}
+
+// ========== 空状态 ==========
+.empty-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px $spacing-lg;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: $spacing-lg;
+}
+
+.empty-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: $jd-text;
+    margin-bottom: $spacing-sm;
+}
+
+.empty-hint {
+    font-size: 14px;
+    color: $jd-subtext;
+}
+
+// ========== 发布弹窗 ==========
+.modal-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.modal-content {
+    width: 100%;
+    background: #fff;
+    border-radius: 24px 24px 0 0;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $jd-border;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: $jd-text;
+}
+
+.modal-close {
+    font-size: 18px;
+    color: $jd-subtext;
+    padding: $spacing-sm;
+}
+
+.modal-body {
+    padding: $spacing-lg;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-bottom: $spacing-lg;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: $jd-text;
+    margin-bottom: $spacing-sm;
+}
+
+.required {
+    color: #E74C3C;
+}
+
+.form-input {
+    width: 100%;
+    padding: $spacing-md;
+    border: 1px solid $jd-border;
+    border-radius: $radius-sm;
+    font-size: 14px;
+}
+
+.points-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+}
+
+.points-input {
+    width: 100px;
+    text-align: center;
+}
+
+.points-suffix {
+    font-size: 14px;
+    color: $jd-subtext;
+}
+
+.form-textarea {
+    width: 100%;
+    height: 80px;
+    padding: $spacing-md;
+    border: 1px solid $jd-border;
+    border-radius: $radius-sm;
+    font-size: 14px;
+    resize: none;
+}
+
+.picker-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $jd-subtext;
+}
+
+.picker-arrow {
+    font-size: 16px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: $spacing-md;
+    padding: $spacing-lg;
+    padding-bottom: calc($spacing-lg + env(safe-area-inset-bottom));
+    border-top: 1px solid $jd-border;
+}
+
+.modal-footer .btn {
+    flex: 1;
+}
